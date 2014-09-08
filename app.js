@@ -51,10 +51,10 @@ var showQuestion = function(question) {
 
 // this function takes the answerer object returned by StackOverflow 
 // and creates new result to be appended to DOM
-var showAnswerer = function(answerers){
+var showAnswerer = function(answerer){
 
 	// clone our result template code
-	var result = $('.templates .inspiration').clone();
+	var result = $('.templates .answerer').clone();
 
 	// set the user properties in result
 	var userElem = result.find('.user a');
