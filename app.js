@@ -1,21 +1,4 @@
-$(document).ready( function() {
-	$('.unanswered-getter').submit( function(event){
-		// zero out results if previous search has run
-		$('.results').html('');
-		// get the value of the tags the user submitted
-		var tags = $(this).find("input[name='tags']").val();
-		getUnanswered(tags);
-	});
 
-	$('.inspiration-getter').submit(function(event){
-		// zero out results if previous search has run
-		$('.results').html('');
-		// get the value of the tags the user submitted
-		var tags = $(this).find("input[name='answerers']").val();
-		getAnswerer(tags);
-	});
-});
-	
 // this function takes the question object returned by StackOverflow 
 // and creates new result to be appended to DOM
 var showQuestion = function(question) {
@@ -39,11 +22,8 @@ var showQuestion = function(question) {
 
 	// set some properties related to asker
 	var asker = result.find('.asker');
-	asker.html('<p>Name: <a target="_blank" href=http://stackoverflow.com/users/' + question.owner.user_id + ' >' +
-													question.owner.display_name +
-												'</a>' +
-							'</p>' +
- 							'<p>Reputation: ' + question.owner.reputation + '</p>'
+	asker.html('<p>Name: <a target="_blank" href=http://stackoverflow.com/users/' + question.owner.user_id + ' >' + question.owner.display_name +
+	'</a>' + '</p>' + '<p>Reputation: ' + question.owner.reputation + '</p>'
 	);
 
 	return result;
@@ -126,7 +106,7 @@ var getUnanswered = function(tags) {
 // get inspiration/answerer functionality
 // takes a string of semi-colon separated tags to be searched
 // for on StackOverflow
-var getAnswerer = function(tags){
+var getInspiration = function(tags){
 
 	// the parameters we need to pass in our request to StackOverflow's API
 	var request = {
@@ -159,6 +139,25 @@ var getAnswerer = function(tags){
 	});
 };
 
+// jQuery interaction with the DOM
+$(document).ready( function() {
+	$('.unanswered-getter').submit( function(event){
+		// zero out results if previous search has run
+		$('.results').html('');
+		// get the value of the tags the user submitted
+		var tags = $(this).find("input[name='tags']").val();
+		getUnanswered(tags);
+	});
+
+	$('.inspiration-getter').submit(function(event){
+		// zero out results if previous search has run
+		$('.results').html('');
+		// get the value of the tags the user submitted
+		var tags = $(this).find("input[name='answerers']").val();
+		getInspiration(tags);
+	});
+});
+	
 
 
 
